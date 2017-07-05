@@ -8,9 +8,10 @@ using PlayersAPI;
 namespace PingPong.Migrations
 {
     [DbContext(typeof(PingPongDb))]
-    partial class PingPongDbModelSnapshot : ModelSnapshot
+    [Migration("20170705234945_Test Migration")]
+    partial class TestMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
