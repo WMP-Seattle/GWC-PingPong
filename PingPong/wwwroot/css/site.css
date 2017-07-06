@@ -40,3 +40,25 @@ textarea {
         display: none;
     }
 }
+
+.container-border{
+    border-bottom:2px solid lightgray;
+    border-top:2px solid lightgray;
+    border-left:2px solid lightgray;
+    border-right:2px solid lightgray;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+table.table-spacing-left{
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.header-padding{
+    padding-bottom: 20px;
+}
+
+.table-border{
+    border: 1px solid grey
+} 
