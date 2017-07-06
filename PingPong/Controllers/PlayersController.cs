@@ -34,14 +34,20 @@ namespace PlayersAPI.Controllers
             }
         }
 
-        /*[HttpGet ({"firstName"})] 
+        // GET api/players/name?firstName={}&lastName={}
+        // Gets a particular player by first and last name
+        [HttpGet] 
+        [Route("name")]
         public PlayerData Get([FromQueryAttribute]String firstName, [FromQueryAttribute] String lastName)
         {
+            Console.WriteLine("first name: " + firstName);
+            Console.WriteLine("last name: " + lastName);
             using (PingPongDb db = new PingPongDb())
             {
-                return db.Players.First(p => p.FirstName == firstName && p.LastName == lastName);
+                return db.Players.First(p => p.FirstName == firstName && 
+                                            p.LastName == lastName);
             }
-        }*/
+        }
 
         // POST api/players
         // Add a new player with JSON body
