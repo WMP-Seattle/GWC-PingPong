@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace PlayersAPI.Controllers
 {
@@ -22,6 +23,26 @@ namespace PlayersAPI.Controllers
             }
         }
 
+        // GET api/players/{id}
+        // Gets a particular player given their ID
+        [HttpGet ("{id}")]
+        public PlayerData Get(int id)
+        {
+            using (PingPongDb db = new PingPongDb())
+            {
+                return db.Players.First(p => p.Id == id);
+            }
+        }
+
+        /*[HttpGet ({"firstName"})] 
+        public PlayerData Get([FromQueryAttribute]String firstName, [FromQueryAttribute] String lastName)
+        {
+            using (PingPongDb db = new PingPongDb())
+            {
+                return db.Players.First(p => p.FirstName == firstName && p.LastName == lastName);
+            }
+        }*/
+
         // POST api/players
         // Add a new player with JSON body
         [HttpPost]
@@ -31,6 +52,21 @@ namespace PlayersAPI.Controllers
             using (PingPongDb db = new PingPongDb())
             {
                 db.Players.Add(posted);
+                db.SaveChanges();
+            }
+        }
+
+        //PUT api/players/{id}
+        //Update a player's data
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody]JObject value)
+        {
+            //Integer PlayerData.NumberWins = value.NumberWins;
+            PlayerData posted = value.ToObject<PlayerData>();
+            posted.Id = id;
+            using (PingPongDb db = new PingPongDb()) 
+            {
+                db.Players.Update(posted);
                 db.SaveChanges();
             }
         }
