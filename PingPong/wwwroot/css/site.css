@@ -3,6 +3,11 @@
     padding-bottom: 20px;
 }
 
+.player {
+    display: inline-block;
+    width: 50%;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
