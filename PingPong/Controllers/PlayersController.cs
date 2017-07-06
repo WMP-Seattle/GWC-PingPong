@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
+using PingPong.Entities;
 
-namespace PlayersAPI.Controllers
+namespace PingPong.Controllers
 {
     [Route("api/[controller]")]
     public class PlayersController : Controller
@@ -15,7 +16,7 @@ namespace PlayersAPI.Controllers
         // GET api/players
         //Gets all players in the database
         [HttpGet]
-        public IEnumerable<PlayerData> Get()
+        public IEnumerable<Player> Get()
         {
             using (PingPongDb db = new PingPongDb())
             {
@@ -26,7 +27,7 @@ namespace PlayersAPI.Controllers
         // GET api/players/{id}
         // Gets a particular player given their ID
         [HttpGet ("{id}")]
-        public PlayerData Get(int id)
+        public Player Get(int id)
         {
             using (PingPongDb db = new PingPongDb())
             {
@@ -54,7 +55,7 @@ namespace PlayersAPI.Controllers
         [HttpPost]
         public void Post([FromBody]JObject value)
         {
-            PlayerData posted = value.ToObject<PlayerData>();
+            Player posted = value.ToObject<Player>();
             using (PingPongDb db = new PingPongDb())
             {
                 db.Players.Add(posted);
@@ -68,7 +69,7 @@ namespace PlayersAPI.Controllers
         public void Put(int id, [FromBody]JObject value)
         {
             //Integer PlayerData.NumberWins = value.NumberWins;
-            PlayerData posted = value.ToObject<PlayerData>();
+            Player posted = value.ToObject<Player>();
             posted.Id = id;
             using (PingPongDb db = new PingPongDb()) 
             {

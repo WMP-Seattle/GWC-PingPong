@@ -8,9 +8,10 @@ using PingPong;
 namespace PingPong.Migrations
 {
     [DbContext(typeof(PingPongDb))]
-    partial class PingPongDbModelSnapshot : ModelSnapshot
+    [Migration("20170706224352_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
