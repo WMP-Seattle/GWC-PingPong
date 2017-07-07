@@ -37,7 +37,7 @@
                 </form>
             </div>
             <div class="text-center">
-            <button role="submit">Submit</button>
+            <button role="submit" id="submitScore">Submit</button>
             </div>
         </div>    
     </div>
@@ -63,6 +63,41 @@
     </div>
 </div>
 
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $("#submitScore").click(function () {
+            console.log('gets here');
+            var options = {};
+            options.url = "http://localhost:5000/api/games";
+            options.type = "POST";
+
+            var obj = {};
+            obj.PlayerOneName = $("#Player1Name").val();
+            obj.PlayerTwoName = $("#Player2Name").val();
+            obj.PlayerOneId = 1; //hard coding for now
+            obj.PlayerTwoId = 2; //hard coding for now
+            if ($("#Player1Score").val() > $("#Player2Score").val()) obj.Winner = 1;
+            if ($("#Player1Score").val() < $("#Player2Score").val()) obj.Winner = 2;
+            obj.Winner = 1
+
+            console.log('url: ' + options.url);
+            console.log("obj:" + JSON.stringify(obj));
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "html";
+
+            console.log('options: ' + JSON.stringify(options));
+
+            options.success = function (msg) {
+                alert('worked');
+            };
+            options.error = function () {
+                alert('options.error: ' + options.error);
+            };
+            $.ajax(options);
+        });
+    </script>
 
 <!--<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">

@@ -11,8 +11,10 @@ namespace PingPong.Entities
         [Required]
         public int PlayerOneId { get; set; }
         public Player PlayerOne { get; set; }
+        public String PlayerOneName {get; set;}
         public int PlayerTwoId { get; set; }
         public Player PlayerTwo { get; set; }
+        public String PlayerTwoName {get; set;}
         public int Winner { get; set; }
         public bool complete { get; set; }
         

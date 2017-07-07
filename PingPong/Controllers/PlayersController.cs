@@ -39,14 +39,12 @@ namespace PingPong.Controllers
         // Gets a particular player by first and last name
         [HttpGet] 
         [Route("name")]
-        public PlayerData Get([FromQueryAttribute]String firstName, [FromQueryAttribute] String lastName)
+        public Player Get([FromQueryAttribute]String name)
         {
-            Console.WriteLine("first name: " + firstName);
-            Console.WriteLine("last name: " + lastName);
+
             using (PingPongDb db = new PingPongDb())
             {
-                return db.Players.First(p => p.FirstName == firstName && 
-                                            p.LastName == lastName);
+                return db.Players.First(p => p.Name == name);
             }
         }
 
