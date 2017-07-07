@@ -16,7 +16,7 @@ namespace PingPong.Controllers
         // GET api/players
         //Gets all players in the database
         [HttpGet]
-        public IEnumerable<Player> Get()
+        public IEnumerable<Player> GetAllPlayers()
         {
             using (PingPongDb db = new PingPongDb())
             {
@@ -27,7 +27,7 @@ namespace PingPong.Controllers
         // GET api/players/{id}
         // Gets a particular player given their ID
         [HttpGet ("{id}")]
-        public Player Get(int id)
+        public Player FindPlayerById(int id)
         {
             using (PingPongDb db = new PingPongDb())
             {
@@ -35,13 +35,13 @@ namespace PingPong.Controllers
             }
         }
 
-        // GET api/players/name?firstName={}&lastName={}
+        // GET api/players/name?Name={}
         // Gets a particular player by first and last name
         [HttpGet] 
         [Route("name")]
-        public Player Get([FromQueryAttribute]String name)
+        public Player FindPlayerByName([FromQueryAttribute]String name)
         {
-
+            name = name.ToLower();
             using (PingPongDb db = new PingPongDb())
             {
                 return db.Players.First(p => p.Name == name);
@@ -51,20 +51,28 @@ namespace PingPong.Controllers
         // POST api/players
         // Add a new player with JSON body
         [HttpPost]
-        public void Post([FromBody]JObject value)
+        public int AddNewPlayer([FromBody]JObject value)
         {
             Player posted = value.ToObject<Player>();
-            using (PingPongDb db = new PingPongDb())
-            {
-                db.Players.Add(posted);
-                db.SaveChanges();
+            posted.Name = posted.Name.ToLower();
+            int result;
+            try{
+                using (PingPongDb db = new PingPongDb())
+                { 
+                    db.Players.Add(posted);
+                    db.SaveChanges();
+                    result = db.Players.Where(x => x.Name == posted.Name).Select(x => x.Id).FirstOrDefault(); 
+                }
+            }catch{
+                result = -1;
             }
+            return result;
         }
 
         //PUT api/players/{id}
         //Update a player's data
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]JObject value)
+        public void UpdatePlayer(int id, [FromBody]JObject value)
         {
             //Integer PlayerData.NumberWins = value.NumberWins;
             Player posted = value.ToObject<Player>();
