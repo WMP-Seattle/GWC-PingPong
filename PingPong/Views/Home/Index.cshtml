@@ -73,25 +73,25 @@
             options.type = "POST";          
 
             var playerOneObj = {
-                PlayerOneName : $("#Player1Name").val();
+                Name : $("#Player1Name").val()
             };            
 
             var playerTwoObj = {
-                PlayerTwoName : $("#Player2Name").val();
+                Name : $("#Player2Name").val()
             };
 
             var gameObj = {
-                Player1 : playerOneObj, 
-                Player1Score: $("#Player1Score").val();, 
-                Player2 : playerTwoObj, 
-                Player2Score : $("#Player2Score").val(), 
+                PlayerOne : playerOneObj, 
+                PlayerOneScore: $("#Player1Score").val(), 
+                PlayerTwo : playerTwoObj, 
+                PlayerTwoScore : $("#Player2Score").val(), 
             };
 
             var requestObj = {
                 GameObj : gameObj
             };
 
-            options.data = JSON.stringify(requestObj);
+            options.data = JSON.stringify(gameObj);
 
             options.contentType = "application/json";
             options.dataType = "html";
@@ -105,5 +105,5 @@
                 alert('options.error: ' + options.error);
             };
             $.ajax(options);
-        });
+        })
     </script>   

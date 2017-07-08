@@ -8,7 +8,7 @@ using PingPong;
 namespace PingPong.Migrations
 {
     [DbContext(typeof(PingPongDb))]
-    [Migration("20170706224352_Initial")]
+    [Migration("20170707231304_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,11 @@ namespace PingPong.Migrations
 
                     b.Property<int>("PlayerOneId");
 
+                    b.Property<int>("PlayerOneScore");
+
                     b.Property<int>("PlayerTwoId");
+
+                    b.Property<int>("PlayerTwoScore");
 
                     b.Property<int>("Winner");
 

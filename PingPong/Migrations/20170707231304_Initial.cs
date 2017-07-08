@@ -31,7 +31,9 @@ namespace PingPong.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PlayerOneId = table.Column<int>(nullable: false),
+                    PlayerOneScore = table.Column<int>(nullable: false),
                     PlayerTwoId = table.Column<int>(nullable: false),
+                    PlayerTwoScore = table.Column<int>(nullable: false),
                     Winner = table.Column<int>(nullable: false),
                     complete = table.Column<bool>(nullable: false)
                 },

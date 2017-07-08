@@ -22,11 +22,11 @@ namespace PingPong.Migrations
 
                     b.Property<int>("PlayerOneId");
 
-                    b.Property<string>("PlayerOneName");
+                    b.Property<int>("PlayerOneScore");
 
                     b.Property<int>("PlayerTwoId");
 
-                    b.Property<string>("PlayerTwoName");
+                    b.Property<int>("PlayerTwoScore");
 
                     b.Property<int>("Winner");
 
