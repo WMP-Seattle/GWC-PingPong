@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using PingPong.Entities;
+using System.Net.Http;
 
 namespace PingPong.Controllers
 {
@@ -31,7 +32,7 @@ namespace PingPong.Controllers
         {
             using (PingPongDb db = new PingPongDb())
             {
-                return db.Players.First(p => p.Id == id);
+                return db.Players.FirstOrDefault(p => p.Id == id);
             }
         }
 
@@ -44,46 +45,52 @@ namespace PingPong.Controllers
             name = name.ToLower();
             using (PingPongDb db = new PingPongDb())
             {
-                return db.Players.First(p => p.Name == name);
+                return db.Players.FirstOrDefault(p => p.Name == name);
             }
         }
 
         // POST api/players
         // Add a new player with JSON body
         [HttpPost]
-        public int AddNewPlayer([FromBody]JObject value)
+        public Player AddNewPlayer([FromBody]Player player)
         {
-            Player posted = value.ToObject<Player>();
-            posted.Name = posted.Name.ToLower();
-            int result;
-            try{
-                using (PingPongDb db = new PingPongDb())
-                { 
-                    db.Players.Add(posted);
-                    db.SaveChanges();
-                    result = db.Players.Where(x => x.Name == posted.Name).Select(x => x.Id).FirstOrDefault(); 
-                }
-            }catch{
-                result = -1;
+            player.clean();
+            using (PingPongDb db = new PingPongDb())
+            { 
+                db.Players.Add(player);
+                db.SaveChanges();
+                return db.Players.Where(x => x.Name == player.Name).FirstOrDefault(); 
             }
-            return result;
         }
 
         //PUT api/players/{id}
         //Update a player's data
         [HttpPut("{id}")]
-        public void UpdatePlayer(int id, [FromBody]JObject value)
+        public void UpdatePlayer(int id, [FromBody]Player player)
         {
             //Integer PlayerData.NumberWins = value.NumberWins;
-            Player posted = value.ToObject<Player>();
-            posted.Id = id;
+            player.Id = id;
             using (PingPongDb db = new PingPongDb()) 
             {
-                db.Players.Update(posted);
+                db.Players.Update(player);
                 db.SaveChanges();
             }
         }
 
-       
+        //Get api/players/leaderboard/{top}
+        //Gets the leader board of all games played.
+        //top = top number of players to return
+        [HttpGet]
+        [Route("leaderboard/{top=10}")]
+        public Player[] GetLeaderBoard(int top) {
+            try {
+                using(PingPongDb db = new PingPongDb())
+                {
+                    return db.Players.OrderByDescending(x => x.numberWins).Take(top).ToArray();
+                }
+            }catch (Exception e) {
+                throw new HttpRequestException(string.Format("Error: Failed to get Leaderboard.", e)); 
+            }
+        }
     }
 }

@@ -45,7 +45,7 @@
     <div class="col-lg-6">
         <span>
             <h2 class="text-center">Leader Board</h2>
-            <table width="100%" class="table table-striped table-spacing-left">
+            <table id="leaderboard" width="100%" class="table table-striped table-spacing-left">
                 <thead class="text-center">
                     <td width="10%">Rank</td>
                     <td width="50%">Player Name</td>
@@ -53,12 +53,6 @@
                     <td width="20%">Losses</td>
                 </thead>
                 <!-- For each player in the list object, repeat and display in the table -->
-                <tr>
-                    <td>1.</td>
-                    <td class="text-center">Player A</td>
-                    <td class="text-center">1</td>
-                    <td class="text-center">0</td>
-                </tr>
             </table>
         </span>
     </div>
@@ -87,10 +81,6 @@
                 PlayerTwoScore : $("#Player2Score").val(), 
             };
 
-            var requestObj = {
-                GameObj : gameObj
-            };
-
             options.data = JSON.stringify(gameObj);
 
             options.contentType = "application/json";
@@ -99,11 +89,69 @@
             console.log('options: ' + JSON.stringify(options));
 
             options.success = function (msg) {
-                alert('worked');
+                alert('Game Submitted');
+                updateLeaderboard();
             };
             options.error = function () {
                 alert('options.error: ' + options.error);
             };
             $.ajax(options);
         })
+        $( "#leaderboard" ).ready(function() {
+            console.log( "ready!" );
+            updateLeaderboard();
+        });
+        function buildLeaderboard(players) {
+            $('#leaderboard tbody').empty();
+            var table = document.getElementById('leaderboard');
+            var tableBody = document.createElement('tbody');
+
+            players.forEach(function(player, index) {
+                console.log(index, " | Player: ", player);
+                var row =generateRow(player, index);
+                tableBody.appendChild(row);
+            });
+
+            table.appendChild(tableBody);
+        }
+        function generateRow(player, index) {
+            console.log("index:", index);
+            var row = document.createElement('tr');
+            var rank = document.createElement('td');
+            rank.appendChild(document.createTextNode(index+1+'.'));
+            row.appendChild(rank);
+            var name = document.createElement('td');
+            name.appendChild(document.createTextNode(toTitleCase(player.name)));
+            name.className += "text-center ";
+            row.appendChild(name);
+            var wins = document.createElement('td');
+            wins.appendChild(document.createTextNode(player.numberWins));
+            wins.className += "text-center ";
+            row.appendChild(wins);
+            var losses = document.createElement('td');
+            losses.appendChild(document.createTextNode(player.numberLosses));
+            losses.className += "text-center ";
+            row.appendChild(losses);
+
+            return row
+        }
+        function updateLeaderboard() {
+            var options = {
+                type: "GET",
+                url: "http://localhost:5000/api/players/leaderboard"
+            };
+            options.success = function (leaderboard) {
+                console.log("Leaderboard:", leaderboard);
+                buildLeaderboard(leaderboard);
+                alert('Fetched Leaderboard!');
+            };
+            options.error = function () {
+                alert('options.error: ' + options.error);
+            };
+            $.ajax(options);
+        }
+        function toTitleCase(str)
+        {
+            return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        }
     </script>   

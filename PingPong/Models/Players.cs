@@ -14,6 +14,11 @@ namespace PingPong.Entities
         public string Office { get; set; }
         public int numberWins {get; set; }
         public int numberLosses {get; set;}
+
+        public void clean() {
+            if(this.Name != null) this.Name = this.Name.ToLower();
+            if(this.Office != null) this.Office = this.Office.ToLower();
+        }
     }
     public enum TasteRating
     {
