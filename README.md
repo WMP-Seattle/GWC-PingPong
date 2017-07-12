@@ -6,7 +6,7 @@ It will be used for the perpose of teaching coding skills and best practices.
 
 Within the project there are skeleton functions that will assist in completing the project.
 
-##Install
+## Install
 
 1. Install .Net Core SDK 1.0.4. https://www.microsoft.com/net/core#windowscmd
 2. Recommended IED - Visual Studio Code https://code.visualstudio.com/
