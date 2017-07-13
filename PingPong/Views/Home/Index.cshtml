@@ -1,62 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="text-center header-padding">
+<div id="elementToWatch" class="text-center header-padding">
     <h1><strong>Welcome to the Ping Pong Center!</strong></h1>
 </div>
-<div class="row">
-    <!-- PLAYER INFO + SCORES -->
-    <div class="col-lg-6 container-border">
-        <p class="text-center">Enter the outcome of a completed game here!</p>
-        <div>
-            <div class="col-lg-6">
-                <form>
-                    <h4 class="text-center"><strong>Player 1</strong></h4>
-                    <div class="form-group">
-                        <label for="Player1Name">Name:</label>
-                        <input type="text" class="form-control" id="Player1Name" placeholder="First Last">
-                    </div>
-                    <div class="form-group">
-                        <label for="Player1Score">Score:</label>
-                        <input type="int" class="form-control" id="Player1Score" placeholder="0">
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-6">
-                <form>
-                    <h4 class="text-center"><strong>Player 2</strong></h4>
-                    <div class="form-group">
-                        <label for="Player2Name">Name:</label>
-                        <input type="text" class="form-control" id="Player2Name" placeholder="First Last">
-                    </div>
-                    <div class="form-group">
-                        <label for="Player2Score">Score:</label>
-                        <input type="int" class="form-control" id="Player2Score" placeholder="0">
-                    </div>
-                    
-                </form>
-            </div>
-            <div class="text-center">
-            <button role="submit" id="submitScore">Submit</button>
-            </div>
-        </div>    
-    </div>
-    <!-- LeaderBoard -->
-    <div class="col-lg-6">
-        <span>
-            <h2 class="text-center">Leader Board</h2>
-            <table id="leaderboard" width="100%" class="table table-striped table-spacing-left">
-                <thead class="text-center">
-                    <td width="10%">Rank</td>
-                    <td width="50%">Player Name</td>
-                    <td width="20%">Wins</td>
-                    <td width="20%">Losses</td>
-                </thead>
-                <!-- For each player in the list object, repeat and display in the table -->
-                <tbody></tbody>
-            </table>
-        </span>
-    </div>
+<div>
+    <button id="btn">Test JS Code.</button>
 </div>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>

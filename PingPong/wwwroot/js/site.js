@@ -4,62 +4,61 @@
     var rooturl = "http://localhost:5000/";
 
     //When the element with ID='submitScore' is clicked.
-    $("#submitScore").click(function () {
-        console.log('Submit Clicked');
-        submitGame();
+    $("#btn").click(function () {
+        console.log('Button Clicked');
+        sendPostRequest();
     })
-
-    //Saves a new game into the database via the api/games
-    function submitGame() {
-        //options is a REST object, to call our web api.
-        var options = {};
-        options.url = rooturl + "api/games";
-        options.type = "POST";          
-
-        //Build out the data to be sent to the api call.
-
-        //Player objects. PingPong/Models/Players.cs
-        var playerOneObj = {
-            Name : $("#Player1Name").val()
-        };            
-        var playerTwoObj = {
-            Name : $("#Player2Name").val()
-        };
-
-        //Game object. PingPong/Models/Games.cs
-        var gameObj = {
-            PlayerOne : playerOneObj, 
-            PlayerOneScore: $("#Player1Score").val(), 
-            PlayerTwo : playerTwoObj, 
-            PlayerTwoScore : $("#Player2Score").val(), 
-        };
-
-        options.data = JSON.stringify(gameObj);
-
-        options.contentType = "application/json";
-        options.dataType = "html";
-
-        console.log('options: ' + JSON.stringify(options));
-
-        //.success is the callback function that will be called if the api call succeeds.
-        options.success = function (msg) {
-            alert('Game Submitted');
-            updateLeaderboard();
-        };
-        //.error is the callback function that will be called if the api call fails.
-        options.error = function () {
-            alert('options.error: ' + options.error);
-        };
-        $.ajax(options);
-    }
 
     //Once an HTML Dom has been loaded, the .ready function will be called.
     //This function will update the leaderboard once the html has been loaded.
-    $( "#leaderboard" ).ready(function() {
-        console.log( "ready!" );
-        updateLeaderboard();
+    $( "#elementToWatch" ).ready(function() {
+        console.log( "Element ready!" );
     });
 
+    //POST : posts data via the web api.
+    function sendPostRequest() {
+        //xhr XMLHttpRequest calls our web api.
+        //This call is defaulted to the POST within the GamesController
+        var xhr = {};
+        xhr.type = "POST";          
+        xhr.url = rooturl + "api/games";
+
+        //Build out the data to be sent to the api call.
+        xhr.contentType = "application/json";
+        xhr.dataType = "html";
+        xhr.data = {
+            code: 100,
+            message: "This is data I want to send",
+            flag: true
+        };
+
+        //.success is the callback function that will be called if the api call succeeds.
+        xhr.success = function (result, status, xhr) {
+            alert(status);
+        };
+        //.error is the callback function that will be called if the api call fails.
+        xhr.error = function (xhr, status, statusText) {
+            alert(xhr.status + " " + xhr.statusText);
+        };
+        $.ajax(xhr);
+    }
+
+    //api call to fetch leaderboard.
+    function sendGetRequest() {
+        var xhr = {
+            type: "GET",
+            url: rooturl + "api/players/0"
+        };
+        xhr.success = function (result, status, xhr) {
+            alert(status + "\n" + result);
+        };
+        xhr.error = function (xhr, status, statusText) {
+            alert(status + " " + statusText);
+        };
+        $.ajax(xhr);
+    }
+
+    //TODO: turn into skeleton or remove functions.
     //Function to build out the HTML table to show the leaderboard.
     function buildLeaderboard(players) {
         //Remove the old table body.
@@ -104,23 +103,6 @@
         return row
     }
 
-    //api call to fetch leaderboard.
-    function updateLeaderboard() {
-        var options = {
-            type: "GET",
-            url: rooturl + "api/players/leaderboard"
-        };
-        options.success = function (leaderboard) {
-            console.log("Leaderboard:", leaderboard);
-            buildLeaderboard(leaderboard);
-            alert('Fetched Leaderboard!');
-        };
-        options.error = function () {
-            alert('options.error: ' + options.error);
-        };
-        $.ajax(options);
-    }
-    
     //String formating function. Used to capitalize the first letter of each word in a string. 
     //  foo bar -> Foo Bar
     function toTitleCase(str)

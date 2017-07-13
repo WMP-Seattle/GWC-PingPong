@@ -16,6 +16,7 @@ namespace PingPong.Controllers
     {
         // GET api/players
         //Gets all players in the database
+        //TODO: Unused Code.
         [HttpGet]
         public IEnumerable<Player> GetAllPlayers()
         {
@@ -28,53 +29,55 @@ namespace PingPong.Controllers
         // GET api/players/{id}
         // Gets a particular player given their ID
         [HttpGet ("{id}")]
-        public Player FindPlayerById(int id)
+        public IActionResult FindPlayerById(int id)
         {
-            using (PingPongDb db = new PingPongDb())
-            {
-                return db.Players.FirstOrDefault(p => p.Id == id);
+            if(!ModelState.IsValid) {
+                return BadRequest(ModelState);
             }
+            var player = new Player();
+            return Ok(player);
         }
 
         // GET api/players/name?Name={}
-        // Gets a particular player by first and last name
+        // Gets a particular player by name
         [HttpGet] 
         [Route("name")]
-        public Player FindPlayerByName([FromQueryAttribute]String name)
+        public IActionResult FindPlayerByName([FromQueryAttribute]String name)
         {
-            name = name.ToLower();
-            using (PingPongDb db = new PingPongDb())
-            {
-                return db.Players.FirstOrDefault(p => p.Name == name);
+            if(!ModelState.IsValid) {
+                return BadRequest(ModelState);
             }
+            name = name.ToLower();
+            return NotFound();
         }
 
         // POST api/players
         // Add a new player with JSON body
         [HttpPost]
-        public Player AddNewPlayer([FromBody]Player player)
+        public IActionResult AddNewPlayer(Player player)
         {
-            player.clean();
-            using (PingPongDb db = new PingPongDb())
-            { 
-                db.Players.Add(player);
-                db.SaveChanges();
-                return db.Players.Where(x => x.Name == player.Name).FirstOrDefault(); 
+            if(!ModelState.IsValid) {
+                return BadRequest(ModelState);
             }
+
+            Console.WriteLine("Add Player.");
+            //Sanitize the player data.
+            player.clean();
+            return Ok(player);
         }
 
         //PUT api/players/{id}
         //Update a player's data
         [HttpPut("{id}")]
-        public void UpdatePlayer(int id, [FromBody]Player player)
-        {
-            //Integer PlayerData.NumberWins = value.NumberWins;
-            player.Id = id;
-            using (PingPongDb db = new PingPongDb()) 
-            {
-                db.Players.Update(player);
-                db.SaveChanges();
+        public IActionResult UpdatePlayer(int id, Player player)
+        {   
+            if(!ModelState.IsValid) {
+                return BadRequest(ModelState);
             }
+
+            Console.WriteLine("Add Player.");
+            //Update player with new information.
+            return Ok(player);
         }
 
         //Get api/players/leaderboard/{top}
@@ -82,11 +85,11 @@ namespace PingPong.Controllers
         //top = top number of players to return
         [HttpGet]
         [Route("leaderboard/{top=10}")]
-        public Player[] GetLeaderBoard(int top) {
+        public IActionResult GetLeaderBoard(int top) {
             try {
                 using(PingPongDb db = new PingPongDb())
                 {
-                    return db.Players.OrderByDescending(x => x.numberWins).Take(top).ToArray();
+                    return Ok(db.Players.OrderByDescending(x => x.numberWins).Take(top).ToArray());
                 }
             }catch (Exception e) {
                 throw new HttpRequestException(string.Format("Error: Failed to get Leaderboard.", e)); 
