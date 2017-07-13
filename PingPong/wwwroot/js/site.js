@@ -17,7 +17,7 @@
 
     //POST : posts data via the web api.
     function sendPostRequest() {
-        //xhr XMLHttpRequest calls our web api.
+        //xhr -> XMLHttpRequest calls our web api.
         //This call is defaulted to the POST within the GamesController
         var xhr = {};
         xhr.type = "POST";          
@@ -43,7 +43,7 @@
         $.ajax(xhr);
     }
 
-    //api call to fetch leaderboard.
+    //GET request to the web api.
     function sendGetRequest() {
         var xhr = {
             type: "GET",
