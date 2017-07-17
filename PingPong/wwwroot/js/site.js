@@ -58,51 +58,6 @@
         $.ajax(xhr);
     }
 
-    //TODO: turn into skeleton or remove functions.
-    //Function to build out the HTML table to show the leaderboard.
-    function buildLeaderboard(players) {
-        //Remove the old table body.
-        $('#leaderboard tbody').empty();
-
-        var table = document.getElementById('leaderboard');
-        var tableBody = table.getElementsByTagName('tbody').item(0);
-        //var tableBody = document.createElement('tbody');
-
-        //Loop through the player object, add the data to each cell via the generateRow func.
-        players.forEach(function(player, index) {
-            var row = generateRow(player, index);
-            tableBody.appendChild(row);
-        });
-
-        table.appendChild(tableBody);
-    }
-
-    //Function to place relevent cell data into a row and return that row.
-    function generateRow(player, index) {
-        var row = document.createElement('tr');
-
-        var rank = document.createElement('td');
-        rank.appendChild(document.createTextNode(index+1+'.'));
-        row.appendChild(rank);
-        
-        var name = document.createElement('td');
-        name.appendChild(document.createTextNode(toTitleCase(player.name)));
-        name.className += "text-center ";
-        row.appendChild(name);
-        
-        var wins = document.createElement('td');
-        wins.appendChild(document.createTextNode(player.numberWins));
-        wins.className += "text-center ";
-        row.appendChild(wins);
-        
-        var losses = document.createElement('td');
-        losses.appendChild(document.createTextNode(player.numberLosses));
-        losses.className += "text-center ";
-        row.appendChild(losses);
-
-        return row
-    }
-
     //String formating function. Used to capitalize the first letter of each word in a string. 
     //  foo bar -> Foo Bar
     function toTitleCase(str)
