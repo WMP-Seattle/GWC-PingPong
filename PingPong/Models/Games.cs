@@ -9,14 +9,14 @@ namespace PingPong.Entities
         [Key]
         public int Id { get; set; }
         public int PlayerOneId { get; set; }
-        //[Required(ErrorMessage = "Missing Player One information.")]
+        [Required(ErrorMessage = "Missing Player One information.")]
         public Player PlayerOne { get; set; }        
-        // [Required(ErrorMessage = "Missing Player One's score.")]
+        [Required(ErrorMessage = "Missing Player One's score.")]
         public int PlayerOneScore {get; set;}
         public int PlayerTwoId { get; set; }
-        // [Required(ErrorMessage = "Missing Player Two information.")]
+        [Required(ErrorMessage = "Missing Player Two information.")]
         public Player PlayerTwo { get; set; }
-        // [Required(ErrorMessage = "Missing Player Two's score.")]
+        [Required(ErrorMessage = "Missing Player Two's score.")]
         public int PlayerTwoScore {get; set;}
         public int Winner { get; set; }
         public bool complete { get; set; }
