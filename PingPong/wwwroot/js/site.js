@@ -26,11 +26,14 @@
         //Build out the data to be sent to the api call.
         xhr.contentType = "application/json";
         xhr.dataType = "html";
-        xhr.data = {
+        var data = {
             code: 100,
             message: "This is data I want to send",
             flag: true
         };
+
+        //Data must be sent via JSON format.
+        xhr.data = JSON.stringify(data);
 
         //.success is the callback function that will be called if the api call succeeds.
         xhr.success = function (result, status, xhr) {
