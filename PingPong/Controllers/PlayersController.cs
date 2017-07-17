@@ -18,11 +18,12 @@ namespace PingPong.Controllers
         //Gets all players in the database
         //TODO: Unused Code.
         [HttpGet]
-        public IEnumerable<Player> GetAllPlayers()
+        public IActionResult GetAllPlayers()
         {
             using (PingPongDb db = new PingPongDb())
             {
-                return db.Players.ToList();
+                var players = db.Players.ToList();
+                return Ok(players);
             }
         }
 
@@ -89,7 +90,8 @@ namespace PingPong.Controllers
             try {
                 using(PingPongDb db = new PingPongDb())
                 {
-                    return Ok(db.Players.OrderByDescending(x => x.numberWins).Take(top).ToArray());
+                    var players = db.Players.OrderBy(x => x.numberLosses).Take(top).ToArray();
+                    return Ok(players);
                 }
             }catch (Exception e) {
                 throw new HttpRequestException(string.Format("Error: Failed to get Leaderboard.", e)); 
