@@ -12,9 +12,9 @@
     //Saves a new game into the database via the api/games
     function submitGame() {
         //options is a REST object, to call our web api.
-        var options = {};
-        options.url = rooturl + "api/games";
-        options.type = "POST";          
+        var xhr = {};
+        xhr.url = rooturl + "api/games";
+        xhr.type = "POST";          
 
         //Build out the data to be sent to the api call.
 
@@ -34,23 +34,23 @@
             PlayerTwoScore : $("#Player2Score").val(), 
         };
 
-        options.data = JSON.stringify(gameObj);
+        xhr.data = JSON.stringify(gameObj);
 
-        options.contentType = "application/json";
-        options.dataType = "html";
+        xhr.contentType = "application/json";
+        xhr.dataType = "html";
 
-        console.log('options: ' + JSON.stringify(options));
+        console.log('options: ' + JSON.stringify(xhr));
 
         //.success is the callback function that will be called if the api call succeeds.
-        options.success = function (msg) {
-            alert('Game Submitted');
+        xhr.success = function (result, status, xhr) {
+            alert(status);
             updateLeaderboard();
         };
         //.error is the callback function that will be called if the api call fails.
-        options.error = function () {
-            alert('options.error: ' + options.error);
+        xhr.error = function (xhr, status, statusText) {
+            alert(xhr.status + " " + xhr.statusText);
         };
-        $.ajax(options);
+        $.ajax(xhr);
     }
 
     //Once an HTML Dom has been loaded, the .ready function will be called.
@@ -106,19 +106,18 @@
 
     //api call to fetch leaderboard.
     function updateLeaderboard() {
-        var options = {
+        var xhr = {
             type: "GET",
             url: rooturl + "api/players/leaderboard"
         };
-        options.success = function (leaderboard) {
-            console.log("Leaderboard:", leaderboard);
-            buildLeaderboard(leaderboard);
-            alert('Fetched Leaderboard!');
+        xhr.success = function (result, status, xhr) {
+            console.log("Leaderboard:", result);
+            buildLeaderboard(result);
         };
-        options.error = function () {
-            alert('options.error: ' + options.error);
+        xhr.error = function (xhr, status, statusText) {
+            alert(xhr.status + " " + xhr.statusText);
         };
-        $.ajax(options);
+        $.ajax(xhr);
     }
     
     //String formating function. Used to capitalize the first letter of each word in a string. 

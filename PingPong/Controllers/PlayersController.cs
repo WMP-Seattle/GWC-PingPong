@@ -69,7 +69,7 @@ namespace PingPong.Controllers
                 { 
                     db.Players.Add(player);
                     db.SaveChanges();
-                    Ok(db.Players.Where(x => x.Name == player.Name).FirstOrDefault()); 
+                    return Ok(db.Players.Where(x => x.Name == player.Name).FirstOrDefault()); 
                 }
             } catch (Exception e) {
                 throw new HttpRequestException(string.Format("Error: Failed to add player.", e)); 
