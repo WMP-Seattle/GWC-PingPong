@@ -28,22 +28,27 @@ namespace PingPong.Controllers
         // GET api/games
         //Gets all games in the database
         [HttpGet]
-        public IEnumerable<Game> Get()
+        public IActionResult Get()
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             using (PingPongDb db = new PingPongDb())
             {
-                return db.Games.ToList();
+                var games = db.Games.ToList();
+                return Ok(games);
             }
         }
 
         // GET api/games/{id}
         // Gets a particular game given the ID
         [HttpGet ("{id}")]
-        public Game Get(int id)
+        public IActionResult Get(int id)
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             using (PingPongDb db = new PingPongDb())
             {
-                return db.Games.First(p => p.Id == id);
+                var game = db.Games.FirstOrDefault(p => p.Id == id);
+                if(game == null) return NotFound();
+                return Ok(game);
             }
         }
 
@@ -51,8 +56,9 @@ namespace PingPong.Controllers
         //POST api/game
         // Creates a game record in the db
         [HttpPost]
-        public void Post([FromBody]Game gameRequest) 
+        public IActionResult Post([FromBody]Game gameRequest) 
         {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             //Sanitize the data for searching/adding new records.
             gameRequest.PlayerOne.clean();
             gameRequest.PlayerTwo.clean();
@@ -109,6 +115,8 @@ namespace PingPong.Controllers
             //Update the Database again with the Players new win/loss records.
             playersController.UpdatePlayer(playerOne.Id, playerOne);
             playersController.UpdatePlayer(playerTwo.Id, playerTwo);
+
+            return Ok();
         }
        
     }
