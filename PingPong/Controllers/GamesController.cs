@@ -62,7 +62,7 @@ namespace PingPong.Controllers
             //       Update player win/loss records.
             //output: none.
         [HttpPost]
-        public IActionResult Post(Game gameRequest) 
+        public IActionResult AddGame(Game gameRequest) 
         {
             if(!ModelState.IsValid) {
                 return BadRequest(ModelState);
