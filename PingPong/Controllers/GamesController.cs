@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Microsoft.AspNetCore.Http;
-using PingPong.Entities;
-using PingPong.Controllers;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using PingPong.Entities;
+using PingPong.Controllers;
 
+//GWC-PingPong: This file controlls data for the Games table within the database.
+//              Retrieve data and add data via the functions within.
+//TODO: Implement the POST /api/games api function.
 namespace PingPong.Controllers
 {
     [Route("api/[controller]")]

@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
+//GWC-PingPong: Fully implemented. No action required.
+//WARNING: Changes to this file will required EntityFrame Migration updates.
 //Players table to hold First Name, Last Name, and Number of Wins
 namespace PingPong.Entities
 {

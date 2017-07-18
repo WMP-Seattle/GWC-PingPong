@@ -1,14 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using PingPong.Entities;
-using System.Net.Http;
 
+//GWC-PingPong: This file controls data for the Players table within the database.
+//              Retrieve data and add data via the functions within.
+//TODO: Implement GET api/players/{id} - FindPlayerById().
+//      Implement GET api/players/name?Name='' - FindPlayerByName().
+//      Implement POST api/players - AddNewPlayer().
+//      Implement PUT api/players/{id} - UpdatePlayer().
+//      Modify GET api/players/leaderboard/{top} - GetLeaderBoard.
 namespace PingPong.Controllers
 {
     [Route("api/[controller]")]
@@ -16,7 +21,6 @@ namespace PingPong.Controllers
     {
         // GET api/players
         //Gets all players in the database
-        //TODO: Unused Code.
         [HttpGet]
         public IActionResult GetAllPlayers()
         {

@@ -1,0 +1,14 @@
+﻿@using PingPong.Entities
+@{
+    ViewData["Title"] = "Player Profile";
+    var player = ViewData["Player"] as Player;
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@player.Name</h3>
+<h4>@player.Office</h4>
+<h4>Wins: @player.numberWins</h4>
+<h4>Losses: @player.numberLosses</h4>
+
+<!-- This file can be used to display player profiles. 
+     This page is a bonus activity as it covers C# html functionality and will not be covered during GWC.
+-->
