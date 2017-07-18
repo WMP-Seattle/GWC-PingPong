@@ -17,13 +17,6 @@ namespace PingPong.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
         public IActionResult Player()
         {
             //Static player object. Can be changed to an api call to pull data from the database.
