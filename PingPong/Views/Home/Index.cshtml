@@ -1,11 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div id="elementToWatch" class="text-center header-padding">
-    <h1><strong>Welcome to the Ping Pong Center!</strong></h1>
+<div id='title'>
+    <!-- Put your page title here. --> 
 </div>
-<div>
-    <button id="btn">Test JS Code.</button>
+<div class="row">
+    <div>
+	<!-- Use this div to create a Game tracker, including player names and scores. -->
+        <!-- Give the game tracker containter a header that instructs users on what to do. -->
+        <div>
+            <div> 
+				<!-- Use this div to create a form for Player 1. -->		
+				<!-- Within the form, use labels and inputs to collect data for Player 1 Name and Score. -->				
+		    </div>
+            <div>
+				<!-- Use this div to create a form for Player 2. -->		
+				<!-- Within the form, use labels and inputs to collect data for Player 2 Name and Score. -->				
+            </div>
+            <div>
+				<!-- Create a button to submit the players and score information. --> 
+            </div>
+        </div>    
+    </div>
+    
+    <div> <!-- Use this div to create the Leaderboard.-->
+			<!-- Build a table, including a header row, and 4 columns. -->            
+			<!-- For each player in the list object, repeat and display in the table body -->
+    </div>
 </div>
 
+
+<!-- No need to touch this JavaScript code. -->
 <script src="~/lib/jquery/dist/jquery.js"></script>

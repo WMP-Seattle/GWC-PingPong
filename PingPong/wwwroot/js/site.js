@@ -18,9 +18,9 @@
     })
 
     //Once an HTML Dom has been loaded, the .ready function will be called.
-    //This function will run once the html for the element with id='elementToWatch' has been loaded.
-    $( "#elementToWatch" ).ready(function() {
-        console.log( "Element ready!" );
+    //This function will run once the html for the element with id='title' has been loaded.
+    $( "#title" ).ready(function() {
+        console.log( "Title ready!" );
     });
 
     //POST : posts data via the web api.
