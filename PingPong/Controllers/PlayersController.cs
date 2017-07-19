@@ -86,7 +86,7 @@ namespace PingPong.Controllers
         }
 
         //Get api/players/leaderboard/{top}
-        //Gets the leader board of all games played.
+        //Gets the leaderboard of all games played.
         //top = top number of players to return
         [HttpGet]
         [Route("leaderboard/{top=10}")]
