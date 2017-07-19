@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 //GWC-PingPong: Fully implemented. No action required.
-//WARNING: Changes to this file will required EntityFrame Migration updates.
+//WARNING: Changes to this file will require EntityFrame Migration updates.
 //Players table to hold First Name, Last Name, and Number of Wins
 namespace PingPong.Entities
 {
@@ -18,7 +18,7 @@ namespace PingPong.Entities
         public int numberLosses {get; set;}
 
         //This function can be used to sanitize a player object.
-        //Curretly its set to ignore case, a set all letters to lower.
+        //Currently it is set to ignore case, and sets all letters to lower case.
         public void clean() {
             if(this.Name != null) this.Name = this.Name.ToLower();
             if(this.Office != null) this.Office = this.Office.ToLower();
