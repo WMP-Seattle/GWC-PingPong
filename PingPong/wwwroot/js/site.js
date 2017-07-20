@@ -24,7 +24,7 @@
     });
 
     //POST : posts data via the web api.
-    //Use these call to send data to the back end, to either have logic run on it or to have it saved into a database.
+    //Use these calls to send data to the back end, to either have logic run on it or to have it saved into a database.
     function sendPostRequest() {
         //xhr -> XMLHttpRequest calls our web api.
         //This call is defaulted to the POST within the GamesController
@@ -75,7 +75,7 @@
     //Input: a list of pre-sorted players.
     function buildLeaderboard(players) {
        //TODO: Implement code. 
-       //The table thead (the column headers) can be generated within this funciton or staticly created within the html.
+       //The table thead (the column headers) can be generated within this funciton or statically created within the html.
        //Loop through the list of players and append rows of data to an html tbody object to display that data.
     }
 
