@@ -9,8 +9,8 @@ Within the project there are skeleton functions that will assist in completing t
 ## Install
 
 1. Install .Net Core SDK 1.0.4. https://www.microsoft.com/net/core#windowscmd
-2. Recommended IED - Visual Studio Code https://code.visualstudio.com/
-    - Code is not required but is recommend for quick start up of the project.
+2. Recommended IDE - Visual Studio Code https://code.visualstudio.com/
+    - Code is not required but is recommended for quick start up of the project.
     - Install the C# extention for VS Code. https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp
 3. Install git https://git-scm.com/downloads.
 4. Clone the github. https://github.com/WMP-Seattle/GWC-PingPong.git.
