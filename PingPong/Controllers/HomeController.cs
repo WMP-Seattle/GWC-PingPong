@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PingPong.Entities;
 
 //GWC-PingPong: File implemented. No Action required.
-//This files controls the routing of html pages and sending of data to those html pages.
+//This file controls the routing of html pages and sending of data to those html pages.
 //Research .Net Core MVC Controllers for more information.
 namespace PingPong.Controllers
 {
