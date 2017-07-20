@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using PingPong.Entities;
 using PingPong.Controllers;
 
-//GWC-PingPong: This file controlls data for the Games table within the database.
+//GWC-PingPong: This file controls data for the Games table within the database.
 //              Retrieve data and add data via the functions within.
 //TODO: Implement the POST /api/games api function.
 namespace PingPong.Controllers
@@ -55,7 +55,7 @@ namespace PingPong.Controllers
 
 
         //POST api/game
-        // Creates a game record in the db
+        // Creates a game record in the database
             //input: Game object.
             //logic: Determine the winner of the game.
             //       Add game to Games table.
@@ -76,7 +76,7 @@ namespace PingPong.Controllers
             //See if playerOne exists in the database yet.  
 
             //if they do. Remove the player from the game object as to not re-add them to the database.
-            //            But set the Forign Key to that players Id.
+            //            But set the Foreign Key to that players Id.
             //            Update the local version of playerOne as to have accurate win/loss record.
 
             //Repeat for playerTwo.
