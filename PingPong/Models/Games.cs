@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 //GWC-PingPong: Fully implemented. No action required.
-//WARNING: Changes to this file will required EntityFrame Migration updates.
+//WARNING: Changes to this file will require EntityFrame Migration updates.
 //Games table contains 2 players, their scores, the winner and if the game is completed.
 namespace PingPong.Entities
 {
